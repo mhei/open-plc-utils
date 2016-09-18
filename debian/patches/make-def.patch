@@ -1,0 +1,21 @@
+Description: adapt default install directories
+ This patch adjusts the install directories to comply with Debian standards.
+Author: Michael Heimpold <mhei@heimpold.de>
+Origin: other
+Forwarded: no
+Last-Update: 2017-05-21
+
+--- open-plc-utils-2016-09-18-147001703e10e2b18bb3a2a148013475481aeecd.orig/make.def
++++ open-plc-utils-2016-09.18-147001703e10e2b18bb3a2a148013475481aeecd/make.def
+@@ -66,8 +66,9 @@ STRIP=$(CROSS)strip
+ # --------------------------------------------------------------------
+ 
+ ROOTFS?=
+-BIN=${ROOTFS}/usr/local/bin
+-MAN=${ROOTFS}/usr/local/man/man1
++PREFIX?=/usr
++BIN=${ROOTFS}/${PREFIX}/bin
++MAN=${ROOTFS}/${PREFIX}/share/man/man1
+ DOC=${ROOTFS}/home/www/software
+ WWW=${ROOTFS}/home/www
+ FTP=${ROOTFS}/home/ftp

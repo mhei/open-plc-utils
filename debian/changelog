@@ -1,0 +1,5 @@
+open-plc-utils (20201114) unstable; urgency=low
+
+  * Reworked Debian packaging
+
+ -- Michael Heimpold <mhei@heimpold.de>  Sat, 14 Nov 2020 21:22:23 +0100

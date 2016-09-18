@@ -1,0 +1,45 @@
+#!/usr/bin/make -f
+
+export DH_OPTIONS=-v
+DH_VERBOSE=1
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
+
+DESTDIR=$(CURDIR)/debian/open-plc-utils
+
+clean:
+	make clean
+	rm -rf $(DESTDIR)
+
+build build-arch:
+	make all
+
+build-indep:
+	make manuals
+
+install:
+
+binary-arch:
+	dh_testroot -a
+	dh_prep -a
+	make \
+	    ROOTFS=$(DESTDIR) \
+	    BIN=$(DESTDIR)/usr/bin \
+	    MAN=$(DESTDIR)/usr/share/man/man1 \
+	    OWNER=$(shell id -u $$(whoami)) \
+	    GROUP=$(shell id -g $$(whoami)) \
+	    install manuals
+	dh_link -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_strip -a
+	dh_shlibdeps -a
+	dh_installdeb -a
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -a
+
+binary-indep:
+
+binary:
+	dh $@
