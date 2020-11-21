@@ -1,0 +1,5 @@
+autoreconf.*
+.debhelper
+files
+open-plc-utils
+open-plc-utils.substvars

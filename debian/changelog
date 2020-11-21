@@ -1,0 +1,5 @@
+open-plc-utils (20201006.224923.gbb50f635) unstable; urgency=low
+
+  * Debian packaging
+
+ -- Michael Heimpold <mhei@heimpold.de>  Sat, 21 Nov 2020 18:10:37 +0100

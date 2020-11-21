@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+export DH_OPTIONS=-v
+DH_VERBOSE=1
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
+
+DESTDIR=$(CURDIR)/debian/open-plc-utils
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	make all
+
+override_dh_fixperms:
+	find debian/open-plc-utils -true -print0 2>/dev/null | xargs -0r chown --no-dereference 0:0
+	find debian/open-plc-utils ! -type l -a -true -a -true -print0 2>/dev/null | xargs -0r chmod go=rX,u+rw
+	find debian/open-plc-utils/usr/share/doc -type f -a -true -a ! -regex 'debian/open-plc-utils/usr/share/doc/[^/]*/examples/.*' -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/open-plc-utils/usr/share/doc -type d -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0755
+	find debian/open-plc-utils -type f \( -name '*.so.*' -o -name '*.so' -o -name '*.la' -o -name '*.a' -o -name '*.js' -o -name '*.css' -o -name '*.scss' -o -name '*.sass' -o -name '*.jpeg' -o -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.cmxs' -o -name '*.node' \) -a -true -a -true -print0 2>/dev/null | xargs -0r chmod 0644
+	find debian/open-plc-utils/usr/bin -type f -a -true -a -true -print0 2>/dev/null | xargs -0r chmod a+x
+
+override_dh_auto_install:
+	make \
+	    ROOTFS=$(DESTDIR) \
+	    BIN=$(DESTDIR)/usr/bin \
+	    MAN=$(DESTDIR)/usr/share/man/man1 \
+	    install manuals
