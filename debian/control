@@ -1,0 +1,14 @@
+Source: open-plc-utils
+Section: net
+Priority: optional
+Maintainer: Michael Heimpold <mhei@heimpold.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.8
+Homepage: https://github.com/qca/open-plc-utils
+
+Package: open-plc-utils
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qualcomm Atheros Powerline Toolkit
+ This package is an open version of the Qualcomm Atheros Powerline
+ Toolkit.
